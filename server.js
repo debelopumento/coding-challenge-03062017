@@ -41,19 +41,6 @@ app.get('/transactionHistory', (req, res) => {
     });
 });
 
-/*
-currentBalance: {type: Number, required: true},
-  availableBalance: {type: Number, required: true},
-  transactions: [{
-      time: {type: Date, required: true},
-      type: {type: String, required: true},
-      amount: {type: Number, required: true},
-      description: {type: String, required: true},
-      pending: {type: Boolean, required: true},
-      balance: {type: Number, required: true},
-    }]
-*/
-
 
 app.put('/submitTransaction', (req, res) => {
   
@@ -117,11 +104,11 @@ app.put('/submitTransaction', (req, res) => {
 
           if (newTransaction.type === 'deposit') {
             console.log(904, newTransaction.type)
-            setTimeout(clearTransaction, 180000)
+            setTimeout(clearTransaction, 5000)
           }
           if (newTransaction.type === 'withdraw') {
             console.log(905)
-            setTimeout(clearTransaction, 120000)
+            setTimeout(clearTransaction, 5000)
           }
           if (newTransaction.type === 'winFromTicket') {
             console.log(906)

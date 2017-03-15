@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
-class SubmitTransaction extends Component {
+class SubmitDeposit extends Component {
   	
 	constructor() {
 		super()
@@ -19,6 +20,20 @@ class SubmitTransaction extends Component {
 
 	handleSubmit(event) {
 		console.log('submitted', this.state.depositAmount)
+		this.refs.numberInput.value=''
+		const newTransaction = {
+			type: 'deposit',
+			amount: this.state.depositAmount,
+			description: 'BofA Core Checking - XXXX'
+		}
+		const requestURL = 'http://localhost:8080/submitTransaction'
+		console.log(16, newTransaction)
+		axios.put(requestURL, newTransaction)
+      	.then(function(res) {
+        	console.log(15, res)
+            
+    	})
+    	.catch((e) => {console.error('Error: ', e)})
 	}
 
     render() {
@@ -32,4 +47,4 @@ class SubmitTransaction extends Component {
     }
 }
 
-export default SubmitTransaction;
+export default SubmitDeposit;
