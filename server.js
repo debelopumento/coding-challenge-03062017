@@ -73,50 +73,65 @@ app.put('/submitTransaction', (req, res) => {
       }
       if (newTransaction.type === 'deposit' || newTransaction.type === 'winFromTicket') {
         newTransaction.balance = transactionHistory.currentBalance + newTransaction.amount
+        transactionHistory.currentBalance = transactionHistory.currentBalance + newTransaction.amount
       } else if (newTransaction.type === 'withdraw') {
         newTransaction.balance = transactionHistory.currentBalance - newTransaction.amount
+        transactionHistory.currentBalance = transactionHistory.currentBalance - newTransaction.amount
       }
       console.log(902, newTransaction)
       transactionHistory.transactions.push(newTransaction)
       console.log(903, transactionHistory)
 
-      function clearTransaction() {
-        newTransaction.pending = false
-        TransactionHistory
-        .findById('58c86def734d1d635102a8c9')
+      TransactionHistory
+        .findByIdAndUpdate('58c86def734d1d635102a8c9', transactionHistory)
         .exec()
-        .then(currentTransactionHistory => {
-          if(newTransaction.type === 'deposit' || newTransaction.type === 'winFromTicket') {
-            currentTransactionHistory.currentBalance = currentTransactionHistory.currentBalance + newTransaction.amount
+        .then(function() {
+          function clearTransaction() {
+            
+            TransactionHistory
+            .findById('58c86def734d1d635102a8c9')
+            .exec()
+            .then(currentTransactionHistory => {
+              if(newTransaction.type === 'deposit' || newTransaction.type === 'winFromTicket') {
+                console.log(907)
+                currentTransactionHistory.availableBalance = currentTransactionHistory.availableBalance + newTransaction.amount
+                newTransaction.pending = false
+              }
+              if (newTransaction.type === 'withdraw') {
+                currentTransactionHistory.availableBalance = currentTransactionHistory.availableBalance - newTransaction.amount
+                newTransaction.pending = false
+              }
+              currentTransactionHistory.transactions = transactionHistory.transactions.slice(0, (transactionHistory.transactions.length - 1))
+              currentTransactionHistory.transactions.push(newTransaction)
+              TransactionHistory
+              .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
+              .exec()
+              .then(res.status(204).json({message: 'Transaction cleared!'}).end())
+              .catch()
+
+            })
+            .then(res.status(204).end())
+            .catch()
+
+          }
+
+          if (newTransaction.type === 'deposit') {
+            console.log(904, newTransaction.type)
+            setTimeout(clearTransaction, 180000)
           }
           if (newTransaction.type === 'withdraw') {
-            currentTransactionHistory.currentBalance = currentTransactionHistory.currentBalance - newTransaction.amount
+            console.log(905)
+            setTimeout(clearTransaction, 120000)
           }
-          currentTransactionHistory.transactions = transactionHistory.transactions
-          TransactionHistory
-          .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
-          .exec()
-          .then(res.status(204).json({message: 'Transaction cleared!'}).end())
-          .catch()
-
+          if (newTransaction.type === 'winFromTicket') {
+            console.log(906)
+            clearTransaction()
+          }
         })
         .then(res.status(204).end())
         .catch()
 
-      }
-
-      if (newTransaction.type === 'deposit') {
-        console.log(904, newTransaction.type)
-        setTimeout(clearTransaction, 30)
-      }
-      if (newTransaction.type === 'withdraw') {
-        console.log(905)
-        setTimeout(clearTransaction, 20)
-      }
-      if (newTransaction.type === 'winFromTicket') {
-        console.log(906)
-        clearTransaction()
-      }
+      
     })
     .then(res.status(204).end())
     .catch()

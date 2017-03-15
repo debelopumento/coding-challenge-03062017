@@ -49,9 +49,7 @@ class Transactions extends React.Component {
 		console.log(1)
 		
 		return (
-			<div>
-				<p>My Savings History as of <Time /></p>
-			</div>
+				<div>My Savings History as of <Time /></div>
 		)
 	}
 }
