@@ -4,12 +4,7 @@ import store from '../store'
 
 import axios from 'axios'
 
-const CurrentBalanceReducer = (state=200, action) => {
-	
-	
 
-	return state
-}
 
 const TransactionHistoryReducer = (state=null, action) => {
 	switch (action.type) {
@@ -23,7 +18,6 @@ const TransactionHistoryReducer = (state=null, action) => {
 
 
 const allReducers = combineReducers({
-	currentBalance: CurrentBalanceReducer,
 	transactionHistory: TransactionHistoryReducer
 })
 

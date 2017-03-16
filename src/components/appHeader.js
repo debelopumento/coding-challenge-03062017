@@ -6,14 +6,14 @@ class AppHeader extends Component {
     	<div className='appHeader'>
     		<button>Back</button>
     		<div>
-    			<tr>
-    				<th>L</th>
-    				<th>N</th>
-    			</tr>
-    			<tr>
-    				<th>G</th>
-    				<th>M</th>
-    			</tr>
+    			<div>
+    				<span>L</span>
+    				<span>N</span>
+    			</div>
+    			<div>
+    				<span>G</span>
+    				<span>M</span>
+    			</div>
     		</div>
     	</div>
     )

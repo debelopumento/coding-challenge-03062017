@@ -1,57 +1,101 @@
-import React, { Component } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import store from '../store'
 import axios from 'axios'
 import Time from './time'
+import * as actions from '../actions/actionIndex'
 //import { getTransactionHistory } from '../actions/actionIndex'
 
-const getTransactionHistory = () => {
-	return function(dispatch) {
-		console.log(7)
-        axios.get('http://localhost:8080/transactionHistory')
-      	.then(function(res) {
-        	console.log(15, res)
-            dispatch({
-        		type: 'GET_TRANSACTION_HISTORY',
-        		payload: res
-        	})
-    	})
-    	.catch((e) => {console.error('Error: ', e)})
+const { object, func} = PropTypes
+/*
+@connect(
+	storeState => ({
+		data: storeState.transactionHistory,
+	}),
+	{
+		load: actions.getTransactionHistory,
+	}
+)
 
+const DisplayedTransactions = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Transactions)
+
+
+const mapStateToProps = (state) => {
+	return {
+		transactionHistory: state.transactionHistory
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({getTransactionHistory: getTransactionHistory}, dispatch)
+}
+*/
+//const TransactionHistoryDisplay = connect(mapStateToProps, mapDispatchToProps)(Transactions)
 
 
-
-
-class Transactions extends React.Component {
+class Transactions extends PureComponent {
 	
+	
+	static PropTypes = {
+		data: object,
+		load: func
+	}
+
+	static defaultProps = {
+		data: {}
+	}
+
+	componentWillMount() {
+		this.props.load()
+	}
+	
+	/*
 	constructor() {
 		super()
-
 		this.state = {
 			transactionHistory: null
 		}
-
 		store.subscribe(() => {
 			this.setState({
 				transactionHistory: store.getState().transactionHistory
 			})
 		})
 	}
+	*/
 
-	ComponentWillMount() {
-		console.log(2)
-		//store.dispatch(getTransactionHistory())
+	componentDidMount() {
+		this.interval = setInterval(()=>{this.props.load()}, 20000)
+
 	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval)
+	}
+
 
 	render() {
 		console.log(1)
-		
-		return (
+		console.log(2, this.props.data)
+		if(this.props.data != null) {return (
+			<div>
 				<div>My Savings History as of <Time /></div>
-		)
+				<div>{this.props.data.currentBalance}</div>
+			</div>
+		)} else {
+			return <div>My Savings History as of <Time /></div>
+		}
 	}
 }
 
-export default Transactions
+export default connect(
+	storeState => ({
+		data: storeState.transactionHistory,
+	}),
+	{
+		load: actions.getTransactionHistory,
+	}
+)(Transactions) 

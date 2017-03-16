@@ -93,11 +93,12 @@ app.put('/submitTransaction', (req, res) => {
               TransactionHistory
               .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
               .exec()
-              .then(res.status(204).json({message: 'Transaction cleared!'}).end())
-              .catch()
+              .then(res.status(204).json({message: 'Transaction cleared!'}))
+              .catch(function(e) {
+                res.status(500).end()
+              })
 
             })
-            .then(res.status(204).end())
             .catch()
 
           }
@@ -115,12 +116,10 @@ app.put('/submitTransaction', (req, res) => {
             clearTransaction()
           }
         })
-        .then(res.status(204).end())
         .catch()
 
       
     })
-    .then(res.status(204).end())
     .catch()
 
 })

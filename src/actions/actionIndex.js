@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 export const GET_TRANSACTION_HISTORY = 'GET_TRANSACTION_HISTORY'
-export const getTrasactionHistory = () => {
+export const getTransactionHistory = () => {
 	return function(dispatch) {
 		console.log(7)
         axios.get('http://localhost:8080/transactionHistory')
@@ -12,7 +12,7 @@ export const getTrasactionHistory = () => {
         	console.log(15, res)
             dispatch({
         		type: GET_TRANSACTION_HISTORY,
-        		payload: res
+        		payload: res.data.transactionHistory[0]
         	})
     	})
     	.catch((e) => {console.error('Error: ', e)})
