@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Transactions from './transactions'
+import TransactionInfo from './transactions'
 import AppHeader from './appHeader'
 import SubmitDeposit from './submitDeposit'
 import SubmitWithdraw from './submitWithdraw'
@@ -13,7 +13,7 @@ class App extends Component {
         <SubmitDeposit />
         <SubmitWithdraw />
         <SubmitWinFromTicket />
-        <Transactions />
+        <TransactionInfo />
       </div>
     );
   }
