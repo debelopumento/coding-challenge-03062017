@@ -58,7 +58,6 @@ app.put('/submitTransaction', (req, res) => {
         amount: req.body.amount,
         description: req.body.description,
       }
-
       let delay = 0
       if (newTransaction.type === 'deposit') {
         delay = 3
@@ -141,7 +140,7 @@ const clearTransactions = () => {
 
     })
     currentTransactionHistory.pendingTransactions = newPendingTransactions
-    
+
     TransactionHistory
     .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
     .exec()
@@ -158,9 +157,6 @@ const clearTransactions = () => {
 }
 
 setInterval(clearTransactions, 1000)
-
-
-
 
 
 app.use('*', function(req, res) {
