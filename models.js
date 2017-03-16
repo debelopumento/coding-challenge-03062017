@@ -8,9 +8,15 @@ const transactionHistorySchema = mongoose.Schema({
       type: {type: String, required: true},
       amount: {type: Number, required: true},
       description: {type: String, required: true},
-      pending: {type: Boolean, required: true},
-      balance: {type: Number, required: true},
-    }]
+      pendingClearTime: {type: Date, required: true},
+      balance: {type: Number, required: true}
+    }],
+  pendingTransactions: [{
+      time: {type: Date, required: true},
+      type: {type: String, required: true},
+      amount: {type: Number, required: true},
+      pendingClearTime: {type: Date, required: true},
+  }]
 });
 
 transactionHistorySchema.methods.apiRepr = function() {
@@ -18,7 +24,8 @@ transactionHistorySchema.methods.apiRepr = function() {
     id: this._id,
     currentBalance: this.currentBalance,
     availableBalance: this.availableBalance,
-    transactions: this.transactions
+    transactions: this.transactions,
+    pendingTransactions: this.pendingTransactions
     
   };
 }
