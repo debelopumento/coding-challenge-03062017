@@ -7,14 +7,14 @@ import Time from './time'
 import * as actions from '../actions/actionIndex'
 
 
-
-
 const Transaction = (props) => {
 	return (
 		<div>
 			<div>
 				<span>{props.date}</span>
 				$<span>{props.amount}</span>
+				<span>{props.type}</span>
+				<span>{props.pending}</span>
 				$<span>{props.balance}</span>
 			</div>
 			<div>
@@ -26,7 +26,6 @@ const Transaction = (props) => {
 }
 
 const TransactionList = (props) => {
-	console.log(17, props.transactions)
 	const formatDate = (time) => {
 		return time.slice(0, 10)
 	}
@@ -34,19 +33,29 @@ const TransactionList = (props) => {
 		return time.slice(11, 19)
 	}
 	let i = 0 
-	const transactions = props.transactions.map(function(transaction) {
-		const transactionDate = formatDate(transaction.time)
-		const transactionTime = formatTime(transaction.time)
-		i++
-		return <Transaction key={i} date={transactionDate} amount={transaction.amount} balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+	const pendingTransactions = props.data.pendingTransactions.map(function(transaction) {
+		if (i <= 9) {
+			i++
+			const transactionDate = formatDate(transaction.time)
+			const transactionTime = formatTime(transaction.time)
+			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+		}
 	})
-	console.log(18, transactions)
+	const clearedTransactions = props.data.transactions.map(function(transaction) {
+		if (i <= 9) {	
+			i++
+			const transactionDate = formatDate(transaction.time)
+			const transactionTime = formatTime(transaction.time)
+			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+		}
+	})
 	return (
 		<div>
-			{transactions}
+			{pendingTransactions}
+			{clearedTransactions}
+			
 		</div>
 	)
-	
 }
 
 
@@ -84,7 +93,7 @@ class TransactionInfo extends PureComponent {
 					<div>My Savings History as of <Time /></div>
 					<div>Current Balance: {this.props.data.currentBalance} (${this.props.data.availableBalance} Available)</div>
 					<div><span>Recent Activity</span><span>Balance</span></div>
-					<TransactionList transactions={this.props.data.transactions}/>
+					<TransactionList data={this.props.data}/>
 				</div>
 			)} else {
 				return <div>My Savings History as of <Time /></div>

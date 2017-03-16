@@ -15,7 +15,9 @@ const transactionHistorySchema = mongoose.Schema({
       time: {type: Date, required: true},
       type: {type: String, required: true},
       amount: {type: Number, required: true},
+      description: {type: String, required: true},
       pendingClearTime: {type: Date, required: true},
+      balance: {type: Number, required: true}
   }]
 });
 

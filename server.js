@@ -85,7 +85,7 @@ app.put('/submitTransaction', (req, res) => {
       newTransaction.pendingClearTime = later
       
       console.log(902, newTransaction)
-      transactionHistory.transactions.unshift(newTransaction)
+      
       transactionHistory.pendingTransactions.push(newTransaction)
       console.log(903, transactionHistory.transactions, 908, transactionHistory.pendingTransactions)
 
@@ -126,20 +126,22 @@ const clearTransactions = () => {
       if (transaction.pendingClearTime <= now) {
         console.log(821)
         //clear this transaction
+        currentTransactionHistory.transactions.unshift(transaction)
         if(transaction.type === 'deposit' || transaction.type === 'winFromTicket') {
           console.log(907)
           currentTransactionHistory.availableBalance = currentTransactionHistory.availableBalance + transaction.amount
-          
         }
         if (transaction.type === 'withdraw') {
           currentTransactionHistory.availableBalance = currentTransactionHistory.availableBalance - transaction.amount
         }
+
       } else {
         newPendingTransactions.push(transaction)
       }
 
     })
     currentTransactionHistory.pendingTransactions = newPendingTransactions
+    
     TransactionHistory
     .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
     .exec()
