@@ -19,11 +19,12 @@ class SubmitDeposit extends Component {
 	}
 
 	handleSubmit(event) {
+		event.preventDefault()
 		console.log('submitted', this.state.depositAmount)
 		this.refs.numberInput.value=''
 		const newTransaction = {
 			type: 'deposit',
-			amount: this.state.depositAmount,
+			amount: Number(this.state.depositAmount),
 			description: 'BofA Core Checking - XXXX'
 		}
 		const requestURL = 'http://localhost:8080/submitTransaction'
@@ -41,7 +42,7 @@ class SubmitDeposit extends Component {
         <div>
       	  <p>Deposit (Clears in 3 minutes):</p>
       	  <input placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input type='submit' onClick={this.handleSubmit} />
+      	  <input value='Submit' type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }

@@ -25,14 +25,13 @@ class SubmitWinFromTicket extends Component {
 		const newTransaction = {
 			type: 'winFromTicket',
 			amount: Number(this.state.winAmount),
-			description: `Ticket #{ticketNumber}`
+			description: `Ticket #${ticketNumber}`
 		}
 		const requestURL = 'http://localhost:8080/submitTransaction'
 		console.log(16, newTransaction)
 		axios.put(requestURL, newTransaction)
       	.then(function(res) {
         	console.log(15, res)
-            
     	})
     	.catch((e) => {console.error('Error: ', e)})
 	}

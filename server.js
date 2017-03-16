@@ -66,7 +66,7 @@ app.put('/submitTransaction', (req, res) => {
         transactionHistory.currentBalance = transactionHistory.currentBalance - newTransaction.amount
       }
       console.log(902, newTransaction)
-      transactionHistory.transactions.push(newTransaction)
+      transactionHistory.transactions.unshift(newTransaction)
       console.log(903, transactionHistory)
 
       TransactionHistory

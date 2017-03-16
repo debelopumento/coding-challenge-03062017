@@ -10,7 +10,6 @@ import * as actions from '../actions/actionIndex'
 
 
 const Transaction = (props) => {
-	console.log(20, props)
 	return (
 		<div>
 			<div>
@@ -68,7 +67,7 @@ class TransactionInfo extends PureComponent {
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(()=>{this.props.load()}, 50000)
+		this.interval = setInterval(()=>{this.props.load()}, 5000)
 	}
 
 	componentWillUnmount() {
