@@ -29,7 +29,7 @@ app.get('/transactionHistory', (req, res) => {
     .find()
     .exec()
     .then(transactionHistory => {
-      res.json({
+      res.status(200).json({
         transactionHistory: transactionHistory.map(
           transactionHistory => transactionHistory.apiRepr())
       });
@@ -75,6 +75,7 @@ app.put('/submitTransaction', (req, res) => {
         console.log(904, newTransaction.type)
         newTransaction.balance = transactionHistory.currentBalance + newTransaction.amount
         transactionHistory.currentBalance = transactionHistory.currentBalance + newTransaction.amount
+        
         transactionHistory.pendingTransactions.unshift(newTransaction)
       }
       if (newTransaction.type === 'withdraw') {
@@ -152,11 +153,9 @@ const clearTransactions = () => {
     TransactionHistory
     .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
     .exec()
-    .then(res.status(204).json({message: 'Pending transactions checked!'}))
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Internal server error'});
     })
 
 
@@ -164,12 +163,11 @@ const clearTransactions = () => {
   .catch(
     err => {
       console.error(err);
-      res.status(500).json({message: 'Internal server error'});
   })
 
 }
 
-setInterval(clearTransactions, 10000)
+setInterval(clearTransactions, 1000)
 
 
 app.use('*', function(req, res) {

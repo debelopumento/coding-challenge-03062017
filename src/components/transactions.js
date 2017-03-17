@@ -26,11 +26,19 @@ const Transaction = (props) => {
 }
 
 const TransactionList = (props) => {
+
+
 	const formatDate = (time) => {
-		return time.slice(0, 10)
+		console.log(111, time)
+		const date = new Date(time)
+		console.log(122, date, 123, date.toString())
+		return date.toString()
 	}
 	const formatTime = (time) => {
-		return time.slice(11, 19)
+		const date = new Date(time)
+
+		console.log(133, date, 134, date.toString())
+		return date.toString()
 	}
 	let i = 0 
 	const pendingTransactions = props.data.pendingTransactions.map(function(transaction) {
@@ -76,7 +84,7 @@ class TransactionInfo extends PureComponent {
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(()=>{this.props.load()}, 1000)
+		this.interval = setInterval(()=>{this.props.load()}, 10000)
 	}
 
 	componentWillUnmount() {

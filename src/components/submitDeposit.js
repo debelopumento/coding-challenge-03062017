@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import reactCSS from 'reactcss'
 
 class SubmitDeposit extends Component {
   	
@@ -38,9 +39,24 @@ class SubmitDeposit extends Component {
 	}
 
     render() {
+      const styles = reactCSS({
+	      'default': {
+	        inputContainer: {
+	            textAlign: 'left',
+	            backgroundColor: '#dddddd',
+	            height: '70px',
+	            width: '340px',
+	            marginLeft: '10px'
+	        },
+	        inputContainerText: {
+	        	margin: '8px',
+	        	marginTop: '12px'
+	        }
+	      }
+	    })
       return (
-        <div>
-      	  <p>Deposit (Clears in 3 minutes):</p>
+        <div style={ styles.inputContainer }>
+      	  <p style={ styles.inputContainerText }>Deposit (Clears in 3 minutes):</p>
       	  <input placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
       	  <input value='Submit' type='submit' onClick={this.handleSubmit} />
         </div>
