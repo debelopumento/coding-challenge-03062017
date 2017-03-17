@@ -22,14 +22,13 @@ class AppHeader extends Component {
             fontWeight: 'bold',
             transform: 'scaleY(0.9)'
         },
-        container: {
+        logoContainer: {
             paddingTop: '5px',
         },
-        logoContainer: {
+        logoRow: {
             width: '50px',
             height: '22px',
             margin: '0 auto',
-
             float: 'center'
         },
 
@@ -42,22 +41,18 @@ class AppHeader extends Component {
             float: 'left'
         },
 
-        logoRow: {
-            
-        }
-
       }
     })
 
     return (
     	<div style={ styles.appHeader }>
             <div style = { styles.button}><i className="fa fa-angle-left"></i>&nbsp;&nbsp;Back</div>
-                <div style={ styles.container }>
-                    <div style={ styles.logoContainer }>
+                <div style={ styles.logoContainer }>
+                    <div style={ styles.logoRow }>
         				<div style={ styles.logo }>L</div>
         				<div style={ styles.logo }>N</div>
                     </div>
-                    <div style={ styles.logoContainer }>
+                    <div style={ styles.logoRow }>
                         <div style={ styles.logo }>G</div>
                         <div style={ styles.logo }>M</div>
                     </div>
@@ -68,10 +63,3 @@ class AppHeader extends Component {
 }
 
 export default AppHeader
-
-/*
-<div>
-                <div style={ styles.logo }>&nbsp;G&nbsp;</div>
-                <div style={ styles.logo }>&nbsp;M&nbsp;</div>
-            </div>
-            */
