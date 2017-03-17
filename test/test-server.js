@@ -27,6 +27,7 @@ describe('index page', function() {
   })
 })
 
+/*
 describe('api', function() {
   it('should get transaction info from database', function(done) {
     this.timeout(5000)
@@ -51,5 +52,6 @@ describe('api', function() {
       
   })
 })
+*/
 
 	
