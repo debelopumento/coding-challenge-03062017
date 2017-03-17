@@ -38,7 +38,7 @@ class TransactionInfo extends PureComponent {
 	        title: { 
 	            display: 'inline-block',
 	            margin: '10px',
-	            fontSize: '22px',
+	            fontSize: '23px',
 	            transform: 'scaleY(0.9)',
 	            fontWeight: 'bold',
 	        },

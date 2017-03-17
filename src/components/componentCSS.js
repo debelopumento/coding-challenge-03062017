@@ -26,7 +26,8 @@ const styles = reactCSS({
 	        	border: 'solid black 1px',
 	        	backgroundColor: 'white',
 	        	paddingLeft: '8px',
-	        	paddingTop: '7px'
+	        	paddingTop: '7px',
+	        	fontSize: '22px'
 
 	        },
 	        submitButton: {
