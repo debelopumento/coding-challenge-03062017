@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import styles from './componentCSS'
 class SubmitWinFromTicket extends Component {
   	
 	constructor() {
@@ -38,13 +38,13 @@ class SubmitWinFromTicket extends Component {
 
     render() {
       return (
-        <div>
-      	  <p>Win from ticket (Clears instantly):</p>
-      	  <input placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input type='submit' onClick={this.handleSubmit} />
+        <div style={ styles.inputContainer }>
+      	  <p style={ styles.inputContainerText }>Win from ticket (Clears instantly):</p>
+      	  <input style={ styles.inputBox} placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
+      	  <input style={ styles.submitButton} type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }
 }
 
-export default SubmitWinFromTicket;
+export default SubmitWinFromTicket

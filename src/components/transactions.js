@@ -5,72 +5,8 @@ import store from '../store'
 import axios from 'axios'
 import Time from './time'
 import * as actions from '../actions/actionIndex'
-
-
-const Transaction = (props) => {
-	console.log(24, props.date)
-	return (
-		<div>
-			<div>
-				<span>{props.date}</span>
-				$<span>{props.amount}</span>
-				<span>{props.type}</span>
-				<span>{props.pending}</span>
-				$<span>{props.balance}</span>
-			</div>
-			<div>
-				<span>{props.time}</span>
-				<span>{props.description}</span>
-			</div>
-		</div>
-	)
-}
-
-const TransactionList = (props) => {
-
-
-	const formatDate = (time) => {
-		const date = new Date(time)
-		const formatedDate = (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear().toString()
-		return formatedDate
-	}
-	const formatTime = (time) => {
-		const date = new Date(time)
-		const rawHour = date.getHours()
-		const ampm = rawHour < 12 ? 'AM' : 'PM'
-		const hour = rawHour > 12 ? rawHour - 12 : rawHour == 0 ? 12 : rawHour
-		const minute = date.toString().slice(19, 21)
-		const second = date.toString().slice(22, 24)
-		const formatedTime = hour + ':' + minute + ':' + second + ampm
-		return formatedTime
-	}
-	let i = 0 
-	const pendingTransactions = props.data.pendingTransactions.map(function(transaction) {
-		if (i <= 9) {
-			i++
-			const transactionDate = formatDate(transaction.time)
-			const transactionTime = formatTime(transaction.time)
-			
-			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
-		}
-	})
-	const clearedTransactions = props.data.transactions.map(function(transaction) {
-		if (i <= 9) {	
-			i++
-			const transactionDate = formatDate(transaction.time)
-			const transactionTime = formatTime(transaction.time)
-			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
-		}
-	})
-	return (
-		<div>
-			{pendingTransactions}
-			{clearedTransactions}
-			
-		</div>
-	)
-}
-
+import TransactionList from './transactionList'
+import reactCSS from 'reactcss'
 
 const { object, func} = PropTypes
 class TransactionInfo extends PureComponent {
@@ -97,20 +33,59 @@ class TransactionInfo extends PureComponent {
 	}
 
 	render() {
-		console.log(2, this.props.data)
+		const styles = reactCSS({
+	      'default': {
+	        title: { 
+	            display: 'inline-block',
+	            margin: '10px',
+	            fontSize: '22px',
+	            transform: 'scaleY(0.9)',
+	            fontWeight: 'bold',
+	        },
+	        balances: {
+	        	transform: 'scaleY(0.9)',
+	        	marginBottom: '10px',
+	        	fontSize: '17px',
+	        	fontWeight: 'bold',
+	        	color: '#555555'
+	        },
+	        currentBalance: {
+	        	transform: 'scaleY(0.8)',
+	        	fontSize: '25px',
+	        	fontWeight: '900',
+	        	color: '#555555'
+	        },
+	        availableBalance: {
+	        	fontWeight: '100',
+	        	fontSize: '16px',
+	        	color: '#666666'
+	        },
+	        left: {
+	        	float: 'left',
+	        	marginLeft: '12px',
+	        	marginTop: '13px',
+	        },
+	        right: {
+	        	float: 'right',
+	        	marginRight: '12px',
+	        	marginTop: '13px',
+	        }
 
+	      }
+	    })
 		if(this.props.data != null) {
 			
 			return (
 				<div>
-					<div>My Savings History as of <Time /></div>
-					<div>Current Balance: {this.props.data.currentBalance} (${this.props.data.availableBalance} Available)</div>
-					<div><span>Recent Activity</span><span>Balance</span></div>
+					<div style={ styles.title }><span>My Savings History as of </span><Time /></div>
+					<div><span style={ styles.balances }>Current Balance: </span><span style={ styles.currentBalance }>${this.props.data.currentBalance} </span><span style={ styles.availableBalance }>(${this.props.data.availableBalance} Available)</span></div>
+					<div><span style={ styles.left }>Recent Activity</span><span style={ styles.right }>Balance</span></div>
 					<TransactionList data={this.props.data}/>
 				</div>
-			)} else {
+			)
+		} else {
 				return <div>My Savings History as of <Time /></div>
-		}
+			}
 	}
 }
 

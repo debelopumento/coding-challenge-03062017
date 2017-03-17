@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import reactCSS from 'reactcss'
-
+import styles from './componentCSS'
 class SubmitDeposit extends Component {
   	
 	constructor() {
@@ -32,33 +32,18 @@ class SubmitDeposit extends Component {
 		console.log(16, newTransaction)
 		axios.put(requestURL, newTransaction)
       	.then(function(res) {
-        	console.log(15, res)
-            
+        	console.log(15, res.data)
     	})
     	.catch((e) => {console.error('Error: ', e)})
 	}
 
     render() {
-      const styles = reactCSS({
-	      'default': {
-	        inputContainer: {
-	            textAlign: 'left',
-	            backgroundColor: '#dddddd',
-	            height: '70px',
-	            width: '340px',
-	            marginLeft: '10px'
-	        },
-	        inputContainerText: {
-	        	margin: '8px',
-	        	marginTop: '12px'
-	        }
-	      }
-	    })
+      
       return (
         <div style={ styles.inputContainer }>
       	  <p style={ styles.inputContainerText }>Deposit (Clears in 3 minutes):</p>
-      	  <input placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input value='Submit' type='submit' onClick={this.handleSubmit} />
+      	  <input style={ styles.inputBox} placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
+      	  <input style={ styles.submitButton} type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }

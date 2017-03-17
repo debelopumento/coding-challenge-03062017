@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import styles from './componentCSS'
 
 class SubmitWithdraw extends Component {
   	
@@ -38,13 +39,13 @@ class SubmitWithdraw extends Component {
 
     render() {
       return (
-        <div>
-      	  <p>Withdraw (Clears in 2 minutes):</p>
-      	  <input placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input type='submit' onClick={this.handleSubmit} />
+        <div style={ styles.inputContainer }>
+      	  <p style={ styles.inputContainerText }>Withdraw (Clears in 2 minutes):</p>
+      	  <input style={ styles.inputBox} placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
+      	  <input style={ styles.submitButton} type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }
 }
 
-export default SubmitWithdraw;
+export default SubmitWithdraw
