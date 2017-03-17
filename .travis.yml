@@ -10,3 +10,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+
+deploy:
+  provider: heroku
+  app: damp-crag-93133
