@@ -8,6 +8,7 @@ import * as actions from '../actions/actionIndex'
 
 
 const Transaction = (props) => {
+	console.log(24, props.date)
 	return (
 		<div>
 			<div>
@@ -29,16 +30,19 @@ const TransactionList = (props) => {
 
 
 	const formatDate = (time) => {
-		console.log(111, time)
 		const date = new Date(time)
-		console.log(122, date, 123, date.toString())
-		return date.toString()
+		const formatedDate = (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear().toString()
+		return formatedDate
 	}
 	const formatTime = (time) => {
 		const date = new Date(time)
-
-		console.log(133, date, 134, date.toString())
-		return date.toString()
+		const rawHour = date.getHours()
+		const ampm = rawHour < 12 ? 'AM' : 'PM'
+		const hour = rawHour > 12 ? rawHour - 12 : rawHour == 0 ? 12 : rawHour
+		const minute = date.toString().slice(19, 21)
+		const second = date.toString().slice(22, 24)
+		const formatedTime = hour + ':' + minute + ':' + second + ampm
+		return formatedTime
 	}
 	let i = 0 
 	const pendingTransactions = props.data.pendingTransactions.map(function(transaction) {
@@ -46,6 +50,7 @@ const TransactionList = (props) => {
 			i++
 			const transactionDate = formatDate(transaction.time)
 			const transactionTime = formatTime(transaction.time)
+			
 			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
 		}
 	})
