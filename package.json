@@ -33,7 +33,9 @@
     "start-react": "react-scripts start",
     "start": "node server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "npm run test:react && npm run test:server",
+    "test:server": "mocha",
+    "test:react": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8080"

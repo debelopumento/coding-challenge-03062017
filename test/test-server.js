@@ -6,7 +6,8 @@ const app = server.app
 const storage = server.storage
 const mongoose = require('mongoose')
 const TransactionHistory = require('../models.js').TransactionHistory
-server.runServer().catch(err => console.error(err));
+server.runServer().catch(err => console.error(err))
+
 
 chai.use(chaiHttp)
 
