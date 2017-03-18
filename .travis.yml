@@ -1,16 +1,19 @@
 language: node_js
 node_js: node
-services: 
+services:
 - mongodb
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
-
+    - g++-4.8
 deploy:
   provider: heroku
+  api_key:
+    secure: cqK5BoO1zg0DvXtvIR0XuwS2faeFwrpH8K27lNnzc6MHjkgjPQvHPKBwh/Slc/FqTQ2yhULpRAP1mdX6ohaVh9mcVknGKWs5X8wDKXx6Yqv96VjDfYUUShi7Lduui31Ko3dpuDk1pnpKVAl2yu9Cyq/4osMIqI9rVMCx2JkwsCViqsu8avrNz83X7wtfs+Uewk5CNIEdWiDb57LH3q219rs9ypXolUYnp3bISfvKk1JytLZxcFXhdBxBFhHTQVad5aGMXIYWAP84qevgM8Yl7SmqH4vP/TPw7svHaIdrJ3iWv14MUnhqaChCwjr4l1fuC02Pqq2DPPpEhdotCX1phtiPyJ8dtMkUY48T3RJ2nbEvkp457tlIv3PB5DRXCDmolofyZx53da5Y1CVhvPhO3OlXouti5Abtsm5W/24Mb032TMgTIGtMGZnRCKc7H3U+EdraAOD2wVvF0GXWxDE9jOPWT/fdoC9y6kKdNR5m3LZVqB8nd8FkEdGY8eSekymf/6I3kFK1M/6u9d/JIixoZCtI+yiyDPovPwE5wHlQzzpfHbLx2MRRTcwHjx0AjBmJwu598upq9asrUsx8lWQFVn6KmFwX0otYm7bqq5k6Y1h0z+c8/IYYpP6raIq4CuMbvuMYn838LbBmdh5zLgffP/CnNUiFt9IAejjtjFB/k+4=
   app: damp-crag-93133
+  on:
+    repo: debelopumento/long-game-challenge
