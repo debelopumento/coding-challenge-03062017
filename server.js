@@ -5,7 +5,6 @@ const morgan = require('morgan');
 const colors = require('colors');
 const cors = require('cors');
 
-require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 

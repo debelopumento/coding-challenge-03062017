@@ -27,7 +27,7 @@ class SubmitWinFromTicket extends Component {
 			amount: Number(this.state.winAmount),
 			description: `Ticket #${ticketNumber}`
 		}
-		const requestURL = 'http://localhost:8080/submitTransaction'
+		const requestURL = '/submitTransaction'
 		console.log(16, newTransaction)
 		axios.put(requestURL, newTransaction)
       	.then(function(res) {

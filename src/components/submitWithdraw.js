@@ -27,7 +27,7 @@ class SubmitWithdraw extends Component {
 			amount: Number(this.state.withdrawAmount),
 			description: 'BofA Core Checking - XXXX'
 		}
-		const requestURL = 'http://localhost:8080/submitTransaction'
+		const requestURL = '/submitTransaction'
 		console.log(16, newTransaction)
 		axios.put(requestURL, newTransaction)
       	.then(function(res) {
