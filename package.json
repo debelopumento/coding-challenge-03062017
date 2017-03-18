@@ -22,16 +22,20 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
-    "mocha": "^2.5.3"
+    "enzyme": "^2.7.1",
+    "mocha": "^2.5.3",
+    "react-addons-test-utils": "^15.4.2",
+    "react-scripts": "0.9.5"
   },
   "scripts": {
     "start-react": "react-scripts start",
     "start": "node server.js",
     "build": "react-scripts build",
-    "test": "mocha",
+    "test": "npm run test:react && npm run test:server",
+    "test:server": "mocha",
+    "test:react": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8080"

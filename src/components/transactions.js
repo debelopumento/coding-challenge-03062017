@@ -8,6 +8,46 @@ import * as actions from '../actions/actionIndex'
 import TransactionList from './transactionList'
 import reactCSS from 'reactcss'
 
+const styles = reactCSS({
+  'default': {
+    title: { 
+        display: 'inline-block',
+        margin: '10px',
+        fontSize: '23px',
+        transform: 'scaleY(0.9)',
+        fontWeight: 'bold',
+    },
+    balances: {
+    	transform: 'scaleY(0.9)',
+    	marginBottom: '10px',
+    	fontSize: '17px',
+    	fontWeight: 'bold',
+    	color: '#555555'
+    },
+    currentBalance: {
+    	transform: 'scaleY(0.8)',
+    	fontSize: '25px',
+    	fontWeight: '900',
+    	color: '#555555'
+    },
+    availableBalance: {
+    	fontWeight: '100',
+    	fontSize: '16px',
+    	color: '#666666'
+    },
+    left: {
+    	float: 'left',
+    	marginLeft: '12px',
+    	marginTop: '13px',
+    },
+    right: {
+    	float: 'right',
+    	marginRight: '12px',
+    	marginTop: '13px',
+    }
+
+  }
+})
 const { object, func} = PropTypes
 class TransactionInfo extends PureComponent {
 	
@@ -33,48 +73,7 @@ class TransactionInfo extends PureComponent {
 	}
 
 	render() {
-		const styles = reactCSS({
-	      'default': {
-	        title: { 
-	            display: 'inline-block',
-	            margin: '10px',
-	            fontSize: '23px',
-	            transform: 'scaleY(0.9)',
-	            fontWeight: 'bold',
-	        },
-	        balances: {
-	        	transform: 'scaleY(0.9)',
-	        	marginBottom: '10px',
-	        	fontSize: '17px',
-	        	fontWeight: 'bold',
-	        	color: '#555555'
-	        },
-	        currentBalance: {
-	        	transform: 'scaleY(0.8)',
-	        	fontSize: '25px',
-	        	fontWeight: '900',
-	        	color: '#555555'
-	        },
-	        availableBalance: {
-	        	fontWeight: '100',
-	        	fontSize: '16px',
-	        	color: '#666666'
-	        },
-	        left: {
-	        	float: 'left',
-	        	marginLeft: '12px',
-	        	marginTop: '13px',
-	        },
-	        right: {
-	        	float: 'right',
-	        	marginRight: '12px',
-	        	marginTop: '13px',
-	        }
-
-	      }
-	    })
 		if(this.props.data != null) {
-			
 			return (
 				<div>
 					<div style={ styles.title }><span>My Savings History as of </span><Time /></div>
