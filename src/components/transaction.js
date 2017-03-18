@@ -1,10 +1,6 @@
 import React from 'react'
 import reactCSS from 'reactcss'
-
-
-const Transaction = (props) => {
-	console.log(24, props.date)
-	const styles = reactCSS({
+const styles = reactCSS({
 		'default': {
 			transactionContainer: { 
 			    display: 'block',
@@ -45,6 +41,10 @@ const Transaction = (props) => {
 
 		}
 	})
+
+const Transaction = (props) => {
+	console.log(24, props.date)
+	
 	return (
 		<div style={ styles.transactionContainer }>
 			<div style={ styles.transactionContainerRow }>

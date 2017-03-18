@@ -7,6 +7,13 @@ const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
+
+
 const {PORT, DATABASE_URL} = require('./config');
 console.log('DATABASE_URL: ', DATABASE_URL);
 const {TransactionHistory} = require('./models');
