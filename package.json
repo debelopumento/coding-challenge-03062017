@@ -36,7 +36,7 @@
     //"test": "npm run test:react && npm run test:server",
     //"test:server": "mocha",
     //"test:react": "react-scripts test --env=jsdom",
-    "test": "mocha",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8080"
