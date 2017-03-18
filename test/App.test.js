@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../src/components/App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from '../src/components/App'
 import { expect } from 'chai'
 import { mount, shallow, render } from 'enzyme'
 
