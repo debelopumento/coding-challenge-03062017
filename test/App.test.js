@@ -8,3 +8,4 @@ import { mount, shallow, render } from 'enzyme'
 it('renders without crashing', () => {
   expect(shallow(<App />).hasClass("App")).to.equal(true);
 });
+
