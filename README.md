@@ -7,6 +7,7 @@ It is deployed on Heroku at: [https://damp-crag-93133.herokuapp.com/](https://da
 ### Run code locally
 ```sh
 npm install
+npm start
 ```
 Then open [http://localhost:8080/](http://localhost:8080/)
 
