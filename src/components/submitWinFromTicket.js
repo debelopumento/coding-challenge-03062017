@@ -41,7 +41,7 @@ class SubmitWinFromTicket extends Component {
         <div style={ styles.inputContainer }>
       	  <p style={ styles.inputContainerText }>Win from ticket (Clears instantly):</p>
       	  <input style={ styles.inputBox} placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input style={ styles.submitButton} type='submit' onClick={this.handleSubmit} />
+      	  <input style={ styles.submitButton} value='Submit' type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }

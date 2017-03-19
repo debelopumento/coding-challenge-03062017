@@ -26,7 +26,6 @@ class SubmitDeposit extends Component {
 			amount: Number(this.state.depositAmount),
 			description: 'BofA Core Checking - XXXX'
 		}
-		
 		const requestURL = '/submitTransaction'
 		axios.put(requestURL, newTransaction)
       	.then(function(res) {
@@ -41,7 +40,7 @@ class SubmitDeposit extends Component {
         <div style={ styles.inputContainer }>
       	  <p style={ styles.inputContainerText }>Deposit (Clears in 3 minutes):</p>
       	  <input style={ styles.inputBox} placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input style={ styles.submitButton} type='submit' onClick={this.handleSubmit} />
+      	  <input style={ styles.submitButton} value='Submit' type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }

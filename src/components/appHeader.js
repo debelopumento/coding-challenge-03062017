@@ -31,8 +31,9 @@ const styles = reactCSS({
 
     logo: {
         backgroundColor: 'white',
+        paddingTop: '2px',
         width: '22px',
-        height: '22px',
+        height: '20px',
         margin: 'auto',
         border: '1px solid black',
         float: 'left'

@@ -42,7 +42,7 @@ class SubmitWithdraw extends Component {
         <div style={ styles.inputContainer }>
       	  <p style={ styles.inputContainerText }>Withdraw (Clears in 2 minutes):</p>
       	  <input style={ styles.inputBox} placeholder='0.00' ref='numberInput' onChange={this.handleChange} type='number' />
-      	  <input style={ styles.submitButton} type='submit' onClick={this.handleSubmit} />
+      	  <input style={ styles.submitButton} value='Submit' type='submit' onClick={this.handleSubmit} />
         </div>
       );
     }
