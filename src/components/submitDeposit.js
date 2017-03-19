@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import styles from './componentCSS'
-import store from '../store'
 
 class SubmitDeposit extends Component {
   	

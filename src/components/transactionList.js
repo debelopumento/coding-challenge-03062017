@@ -7,13 +7,13 @@ const styles = reactCSS({
 		transactionContainer: { 
 		    display: 'block',
 		    marginTop: '40px',
+		    height: '530px',
+		    overflow: 'auto',
 		}
 	}
 })
 
 const TransactionList = (props) => {
-	
-
 	const formatDate = (time) => {
 		const date = new Date(time)
 		const formatedDate = (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear().toString().slice(0,2)
@@ -29,22 +29,22 @@ const TransactionList = (props) => {
 		const formatedTime = hour + ':' + minute + ':' + second + ampm
 		return formatedTime
 	}
-	let i = 0 
+	let length = props.length
+	let index = 0
 	const pendingTransactions = props.data.pendingTransactions.map(function(transaction) {
-		if (i <= 9) {
-			i++
+		if (index <= length) {
+			index++
 			const transactionDate = formatDate(transaction.time)
 			const transactionTime = formatTime(transaction.time)
-			
-			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+			return <Transaction key={index} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
 		}
 	})
 	const clearedTransactions = props.data.transactions.map(function(transaction) {
-		if (i <= 9) {	
-			i++
+		if (index <= length) {	
+			index++
 			const transactionDate = formatDate(transaction.time)
 			const transactionTime = formatTime(transaction.time)
-			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+			return <Transaction key={index} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
 		}
 	})
 

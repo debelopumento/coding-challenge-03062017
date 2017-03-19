@@ -16,7 +16,7 @@ const TransactionHistoryReducer = (state=null, action) => {
 }
 
 const allReducers = combineReducers({
-	transactionHistory: TransactionHistoryReducer
+	transactionHistory: TransactionHistoryReducer,
 })
 
 export default allReducers

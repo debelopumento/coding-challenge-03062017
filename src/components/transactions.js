@@ -54,7 +54,15 @@ class TransactionInfo extends PureComponent {
 	}
 
 	static defaultProps = {
-		data: {}
+		data: {},
+	}
+
+	constructor() {
+		super()
+		this.state = {
+			transactionListLength: 9
+		}
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
 	componentWillMount() {
@@ -69,14 +77,22 @@ class TransactionInfo extends PureComponent {
 		clearInterval(this.interval)
 	}
 
+	handleSubmit(event) {
+		this.state.transactionListLength = this.state.transactionListLength + 10		
+	}
+
 	render() {
 		if(this.props.data != null) {
 			return (
 				<div className="TransactionInfo">
 					<div style={ styles.title }><span>My Savings History as of </span><Time /></div>
-					<div><span style={ styles.balances }>Current Balance: </span><span style={ styles.currentBalance }>${this.props.data.currentBalance} </span><span style={ styles.availableBalance }>(${this.props.data.availableBalance} Available)</span></div>
-					<div><span style={ styles.left }>Recent Activity</span><span style={ styles.right }>Balance</span></div>
-					<TransactionList data={this.props.data}/>
+					<div><span style={ styles.balances }>Current Balance: </span><span style={ styles.currentBalance }>${this.props.data.currentBalance} </span><span style={ styles.availableBalance }>(${this.props.data.availableBalance} Available)</span>
+					</div>
+					<div>
+						<span style={ styles.left }>Recent Activity</span><span style={ styles.right }>Balance</span>
+					</div>
+					<TransactionList data={this.props.data} length={this.state.transactionListLength}/>
+					<input value='More' type='submit' onClick={this.handleSubmit} />
 				</div>
 			)
 		} else {
