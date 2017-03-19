@@ -1,8 +1,4 @@
-import React from 'react'
 import {combineReducers} from 'redux'
-import store from '../store'
-
-import axios from 'axios'
 
 
 
@@ -11,10 +7,16 @@ const TransactionHistoryReducer = (state=null, action) => {
 		case "GET_TRANSACTION_HISTORY": {
 			return action.payload
 		}
+		case "SUBMIT_TRANSACTION": {
+			console.log(45)
+			return state
+			
+		}
 	}
 
 	return state
 }
+
 
 
 const allReducers = combineReducers({

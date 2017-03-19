@@ -43,11 +43,9 @@ const styles = reactCSS({
 class AppHeader extends Component {
   
   render() {
-    
-
     return (
-    	<div style={ styles.appHeader }>
-            <div style = { styles.button}><i className="fa fa-angle-left"></i>&nbsp;&nbsp;Back</div>
+    	<div className="AppHeader" style={ styles.appHeader }>
+            <div style={ styles.button}><i className="fa fa-angle-left"></i>&nbsp;&nbsp;Back</div>
                 <div style={ styles.logoContainer }>
                     <div style={ styles.logoRow }>
         				<div style={ styles.logo }>L</div>

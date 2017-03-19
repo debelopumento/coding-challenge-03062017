@@ -4,15 +4,11 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 
-
 mongoose.Promise = global.Promise;
-
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
-
-
 
 const {PORT, DATABASE_URL} = require('./config');
 console.log('DATABASE_URL: ', DATABASE_URL);
@@ -20,10 +16,8 @@ const {TransactionHistory} = require('./models');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-
 app.use(morgan('common'));
 app.use(express.static('build'));
-
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/build/index.html');
@@ -49,13 +43,10 @@ app.get('/transactionHistory', (req, res) => {
 
 app.put('/submitTransaction', (req, res) => {
   
-    console.log(900, req.body)
-
     TransactionHistory
     .findById('58c86def734d1d635102a8c9')
     .exec()
     .then(transactionHistory => {
-      console.log(901, transactionHistory)
       
       //convert UTC to local time
       const convertUTCtoLocal  = (UTCtime) => {
@@ -70,21 +61,17 @@ app.put('/submitTransaction', (req, res) => {
         description: req.body.description,
       }
 
-      console.log(700, newTransaction.time)
-
       if (newTransaction.type === 'deposit') {
         let delay = 3
         let later = new Date()
         later.setMinutes(later.getMinutes() + delay)
         newTransaction.pendingClearTime = later
-        console.log(904, newTransaction.type)
         newTransaction.balance = transactionHistory.currentBalance + newTransaction.amount
         transactionHistory.currentBalance = transactionHistory.currentBalance + newTransaction.amount
         
         transactionHistory.pendingTransactions.unshift(newTransaction)
       }
       if (newTransaction.type === 'withdraw') {
-        console.log(905)
         let delay = 2
         let later = new Date()
         later.setMinutes(later.getMinutes() + delay)
@@ -94,21 +81,18 @@ app.put('/submitTransaction', (req, res) => {
         transactionHistory.pendingTransactions.unshift(newTransaction)
       }
       if (newTransaction.type === 'winFromTicket') {
-        console.log(906)
         newTransaction.balance = transactionHistory.currentBalance + newTransaction.amount
         transactionHistory.currentBalance = transactionHistory.currentBalance + newTransaction.amount
         transactionHistory.transactions.unshift(newTransaction)
         transactionHistory.availableBalance = transactionHistory.availableBalance + newTransaction.amount
       }
-
-      console.log(902, newTransaction)
       
       TransactionHistory
         .findByIdAndUpdate('58c86def734d1d635102a8c9', transactionHistory)
         .exec()
         .then(function() {
-          res.status(204).json({message: 'Transaction submitted!'})
-          
+          console.log(404)
+          res.status(201).json({message: 'Transaction submitted!', transactionHistory})
         })
         .catch(
           err => {
@@ -125,8 +109,6 @@ app.put('/submitTransaction', (req, res) => {
 
 })
 
-
-
 //go through all pending transactions once a second and clear the valid ones
 const clearTransactions = () => {
   TransactionHistory
@@ -137,24 +119,19 @@ const clearTransactions = () => {
     currentTransactionHistory.pendingTransactions.forEach(function(transaction) {
       const now = new Date()
       if (transaction.pendingClearTime <= now) {
-        console.log(821)
         //clear this transaction
         currentTransactionHistory.transactions.unshift(transaction)
         if(transaction.type === 'deposit') {
-          console.log(907)
           currentTransactionHistory.availableBalance = currentTransactionHistory.availableBalance + transaction.amount
         }
         if (transaction.type === 'withdraw') {
           currentTransactionHistory.availableBalance = currentTransactionHistory.availableBalance - transaction.amount
         }
-
       } else {
         newPendingTransactions.push(transaction)
       }
-
     })
     currentTransactionHistory.pendingTransactions = newPendingTransactions
-    
     TransactionHistory
     .findByIdAndUpdate('58c86def734d1d635102a8c9', currentTransactionHistory)
     .exec()
@@ -162,14 +139,11 @@ const clearTransactions = () => {
       err => {
         console.error(err);
     })
-
-
   })
   .catch(
     err => {
       console.error(err);
   })
-
 }
 
 setInterval(clearTransactions, 1000)

@@ -2,6 +2,15 @@ import React from 'react'
 import Transaction from './transaction'
 import reactCSS from 'reactcss'
 
+const styles = reactCSS({
+	'default': {
+		transactionContainer: { 
+		    display: 'block',
+		    marginTop: '40px',
+		}
+	}
+})
+
 const TransactionList = (props) => {
 	
 
@@ -14,7 +23,7 @@ const TransactionList = (props) => {
 		const date = new Date(time)
 		const rawHour = date.getHours()
 		const ampm = rawHour < 12 ? 'AM' : 'PM'
-		const hour = rawHour > 12 ? rawHour - 12 : rawHour == 0 ? 12 : rawHour
+		const hour = rawHour > 12 ? rawHour - 12 : rawHour === 0 ? 12 : rawHour
 		const minute = date.toString().slice(19, 21)
 		const second = date.toString().slice(22, 24)
 		const formatedTime = hour + ':' + minute + ':' + second + ampm
@@ -36,17 +45,6 @@ const TransactionList = (props) => {
 			const transactionDate = formatDate(transaction.time)
 			const transactionTime = formatTime(transaction.time)
 			return <Transaction key={i} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
-		}
-	})
-
-	const styles = reactCSS({
-		'default': {
-			transactionContainer: { 
-			    display: 'block',
-			    marginTop: '40px',
-			    
-			}
-
 		}
 	})
 

@@ -1,7 +1,7 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Time extends React.Component {
+class Time extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {date: new Date()};
@@ -26,7 +26,7 @@ class Time extends React.Component {
 
   render() {
     return (
-      <span>
+      <span className='Time'>
         {this.state.date.toLocaleTimeString()}
       </span>
     );

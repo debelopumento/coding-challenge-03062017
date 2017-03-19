@@ -1,8 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import store from '../store'
-import axios from 'axios'
 import Time from './time'
 import * as actions from '../actions/actionIndex'
 import TransactionList from './transactionList'
@@ -75,7 +72,7 @@ class TransactionInfo extends PureComponent {
 	render() {
 		if(this.props.data != null) {
 			return (
-				<div>
+				<div className="TransactionInfo">
 					<div style={ styles.title }><span>My Savings History as of </span><Time /></div>
 					<div><span style={ styles.balances }>Current Balance: </span><span style={ styles.currentBalance }>${this.props.data.currentBalance} </span><span style={ styles.availableBalance }>(${this.props.data.availableBalance} Available)</span></div>
 					<div><span style={ styles.left }>Recent Activity</span><span style={ styles.right }>Balance</span></div>
@@ -83,7 +80,7 @@ class TransactionInfo extends PureComponent {
 				</div>
 			)
 		} else {
-				return <div>My Savings History as of <Time /></div>
+				return <div className="TransactionInfo">My Savings History as of <Time /></div>
 			}
 	}
 }

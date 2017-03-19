@@ -43,21 +43,20 @@ const styles = reactCSS({
 	})
 
 const Transaction = (props) => {
-	console.log(24, props.date)
 	
 	return (
-		<div style={ styles.transactionContainer }>
-			<div style={ styles.transactionContainerRow }>
+		<container className='Transaction' style={ styles.transactionContainer }>
+			<div id='transactionDetailLineOne' style={ styles.transactionContainerRow }>
 				<span style={ styles.left }>{props.date}</span>
 				<span style={ styles.center }>${props.amount} {props.type} </span><span style={ styles.pending }>{props.pending}</span>
 				<span style={ styles.right }>${props.balance.toFixed(2)}</span>
 			</div>
-			<div style={ styles.transactionContainerRow }>
+			<div id='transactionDetailLineTwo' style={ styles.transactionContainerRow }>
 				<span style={ styles.left }>{props.time}</span>
 				<span style={ styles.center }>{props.description}</span>
 				<span style={ styles.right }> </span>
 			</div>
-		</div>
+		</container>
 	)
 }
 
