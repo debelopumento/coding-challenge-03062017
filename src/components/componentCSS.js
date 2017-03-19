@@ -9,7 +9,7 @@ const styles = reactCSS({
 	            width: '340px',
 	            margin: 'auto',
 	            marginTop: '15px',
-	            padding: '5px',
+	            padding: '5px'
 
 	        },
 	        inputContainerText: {
@@ -32,14 +32,14 @@ const styles = reactCSS({
 	        },
 	        submitButton: {
 	        	height: '44px',
-	        	width: '115px',
+	        	width: '110px',
 	        	backgroundColor: 'white',
 	        	fontWeight: 'bold',
 	        	border: 'solid black 1px',
+	        	borderRadius: '0',
 	        	float: 'right',
 	        	marginRight: '8px',
 	        	fontSize: '15px'
-
 	        }
 	      }
 	    })
