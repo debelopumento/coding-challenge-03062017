@@ -14,6 +14,11 @@ const styles = reactCSS({
         transform: 'scaleY(0.9)',
         fontWeight: 'bold',
     },
+    balanceContainer: {
+    	width: '100%',
+    	margin: '0 auto',
+    },
+
     balances: {
     	transform: 'scaleY(0.9)',
     	marginBottom: '10px',
@@ -93,7 +98,7 @@ class TransactionInfo extends PureComponent {
 					<div style={ styles.title }><span>My Savings History as of </span><Time /></div>
 					<div><span style={ styles.balances }>Current Balance: </span><span style={ styles.currentBalance }>${this.props.data.currentBalance} </span><span style={ styles.availableBalance }>(${this.props.data.availableBalance} Available)</span>
 					</div>
-					<div>
+					<div style={ styles.balanceContainer }>
 						<span style={ styles.left }>Recent Activity</span><span style={ styles.right }>Balance</span>
 					</div>
 					<TransactionList data={this.props.data} length={this.state.transactionListLength}/>
