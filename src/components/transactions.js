@@ -15,7 +15,7 @@ const styles = reactCSS({
         fontWeight: 'bold',
     },
     balanceContainer: {
-    	width: '100%',
+    	width: '370px',
     	margin: '0 auto',
     },
 
