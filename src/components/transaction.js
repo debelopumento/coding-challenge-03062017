@@ -43,7 +43,7 @@ const styles = reactCSS({
 	})
 
 const Transaction = (props) => {
-	
+
 	return (
 		<container className='Transaction' style={ styles.transactionContainer }>
 			<div id='transactionDetailLineOne' style={ styles.transactionContainerRow }>

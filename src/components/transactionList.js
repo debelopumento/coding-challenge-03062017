@@ -29,6 +29,12 @@ const TransactionList = (props) => {
 		const formatedTime = hour + ':' + minute + ':' + second + ampm
 		return formatedTime
 	}
+	const formatTransactionType = (transactionType) => {
+		if (transactionType === 'winFromTicket') {
+			const transactionTypeDisplay = 'won playing ticket'
+			return transactionTypeDisplay
+		} else return transactionType
+	}
 	let length = props.length
 	let index = 0
 	const pendingTransactions = props.data.pendingTransactions.map(function(transaction) {
@@ -36,7 +42,8 @@ const TransactionList = (props) => {
 			index++
 			const transactionDate = formatDate(transaction.time)
 			const transactionTime = formatTime(transaction.time)
-			return <Transaction key={index} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+			const transactionTypeDisplay = formatTransactionType(transaction.type)
+			return <Transaction key={index} date={transactionDate} amount={transaction.amount} type={transactionTypeDisplay} pending='(pending)' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
 		}
 	})
 	const clearedTransactions = props.data.transactions.map(function(transaction) {
@@ -44,7 +51,8 @@ const TransactionList = (props) => {
 			index++
 			const transactionDate = formatDate(transaction.time)
 			const transactionTime = formatTime(transaction.time)
-			return <Transaction key={index} date={transactionDate} amount={transaction.amount} type={transaction.type} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
+			const transactionTypeDisplay = formatTransactionType(transaction.type)
+			return <Transaction key={index} date={transactionDate} amount={transaction.amount} type={transactionTypeDisplay} pending='' balance={transaction.balance}  time={transactionTime} description={transaction.description} />
 		}
 	})
 
