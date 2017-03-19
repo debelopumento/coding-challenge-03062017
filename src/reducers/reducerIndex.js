@@ -1,7 +1,5 @@
 import {combineReducers} from 'redux'
 
-
-
 const TransactionHistoryReducer = (state=null, action) => {
 	switch (action.type) {
 		case "GET_TRANSACTION_HISTORY": {
@@ -16,8 +14,6 @@ const TransactionHistoryReducer = (state=null, action) => {
 
 	return state
 }
-
-
 
 const allReducers = combineReducers({
 	transactionHistory: TransactionHistoryReducer

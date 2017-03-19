@@ -52,7 +52,6 @@ const TransactionList = (props) => {
 		<div style={ styles.transactionContainer }>
 			{pendingTransactions}
 			{clearedTransactions}
-			
 		</div>
 	)
 }

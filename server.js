@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/build/index.html');
 });
 
+//get all transaction history
 app.get('/transactionHistory', (req, res) => {
   TransactionHistory
     .find()
@@ -41,18 +42,12 @@ app.get('/transactionHistory', (req, res) => {
 });
 
 
+//send PUT request when the user submit a transaction
 app.put('/submitTransaction', (req, res) => {
-  
     TransactionHistory
     .findById('58c86def734d1d635102a8c9')
     .exec()
     .then(transactionHistory => {
-      
-      //convert UTC to local time
-      const convertUTCtoLocal  = (UTCtime) => {
-        const millis = UTCtime.getTime() - (UTCtime.getTimezoneOffset() * 60000)
-        return new Date(millis)
-      }
 
       let newTransaction = {
         time: Date(),

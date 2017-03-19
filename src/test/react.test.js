@@ -47,6 +47,4 @@ it('renders transation without crashing', () => {
   	expect(wrapper.find('container').childAt(0).type()).to.equal('div')
   	expect(wrapper.find('#transactionDetailLineOne').childAt(0).type()).to.equal('span')
   	expect(wrapper.find('#transactionDetailLineTwo').childAt(1).type()).to.equal('span')
-
-
 })
