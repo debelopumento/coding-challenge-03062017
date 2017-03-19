@@ -19,21 +19,25 @@ class SubmitWinFromTicket extends Component {
 	}
 
 	handleSubmit(event) {
-		console.log('submitted', this.state.winAmount)
-		this.refs.numberInput.value=''
-		const ticketNumber = Math.floor(10000000 + Math.random() * 90000000)
-		const newTransaction = {
-			type: 'winFromTicket',
-			amount: Number(this.state.winAmount),
-			description: `Ticket #${ticketNumber}`
-		}
-		const requestURL = '/submitTransaction'
-		console.log(16, newTransaction)
-		axios.put(requestURL, newTransaction)
-      	.then(function(res) {
-        	console.log(15, res)
-    	})
-    	.catch((e) => {console.error('Error: ', e)})
+		const inputAmount = Number(this.state.winAmount)
+		if (inputAmount <= 0 ) {
+			alert('Please submit a value larger than 0!')
+		} else {
+			this.refs.numberInput.value=''
+			const ticketNumber = Math.floor(10000000 + Math.random() * 90000000)
+			const newTransaction = {
+				type: 'winFromTicket',
+				amount: inputAmount,
+				description: `Ticket #${ticketNumber}`
+			}
+			const requestURL = '/submitTransaction'
+			console.log(16, newTransaction)
+			axios.put(requestURL, newTransaction)
+	      	.then(function(res) {
+	        	console.log(15, res)
+	    	})
+	    	.catch((e) => {console.error('Error: ', e)})
+	    }
 	}
 
     render() {

@@ -20,21 +20,23 @@ class SubmitWithdraw extends Component {
 	}
 
 	handleSubmit(event) {
-		console.log('submitted', this.state.withdrawAmount)
-		this.refs.numberInput.value=''
-		const newTransaction = {
-			type: 'withdraw',
-			amount: Number(this.state.withdrawAmount),
-			description: 'BofA Core Checking - XXXX'
-		}
-		const requestURL = '/submitTransaction'
-		console.log(16, newTransaction)
-		axios.put(requestURL, newTransaction)
-      	.then(function(res) {
-        	console.log(15, res)
-            
-    	})
-    	.catch((e) => {console.error('Error: ', e)})
+		const inputAmount = Number(this.state.withdrawAmount)
+		if (inputAmount <= 0 ) {
+			alert('Please submit a value larger than 0!')
+		} else {
+			this.refs.numberInput.value=''
+			const newTransaction = {
+				type: 'withdraw',
+				amount: inputAmount,
+				description: 'BofA Core Checking - XXXX'
+			}
+			const requestURL = '/submitTransaction'
+			axios.put(requestURL, newTransaction)
+	      	.then(function(res) {
+	        	console.log(15, res)
+	    	})
+	    	.catch((e) => {console.error('Error: ', e)})
+    	}	
 	}
 
     render() {

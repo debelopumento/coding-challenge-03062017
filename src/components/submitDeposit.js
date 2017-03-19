@@ -20,18 +20,24 @@ class SubmitDeposit extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		this.refs.numberInput.value=''
-		const newTransaction = {
-			type: 'deposit',
-			amount: Number(this.state.depositAmount),
-			description: 'BofA Core Checking - XXXX'
+		const inputAmount = Number(this.state.depositAmount)
+		if (inputAmount <= 0 ) {
+			alert('Please submit a value larger than 0!')
+		} else {
+			this.refs.numberInput.value=''
+			const newTransaction = {
+				type: 'deposit',
+				amount: inputAmount,
+				description: 'BofA Core Checking - XXXX'
+			}
+			const requestURL = '/submitTransaction'
+			axios.put(requestURL, newTransaction)
+	      	.then(function(res) {
+	        	console.log(15, res.data)
+	    	})
+	    	.catch((e) => {console.error('Error: ', e)}) 
 		}
-		const requestURL = '/submitTransaction'
-		axios.put(requestURL, newTransaction)
-      	.then(function(res) {
-        	console.log(15, res.data)
-    	})
-    	.catch((e) => {console.error('Error: ', e)})    	
+		   	
 	}
 
     render() {
