@@ -78,7 +78,12 @@ class TransactionInfo extends PureComponent {
 	}
 
 	handleSubmit(event) {
-		this.state.transactionListLength = this.state.transactionListLength + 10		
+		const totalTransactionCount = this.props.data.transactions.length + this.props.data.pendingTransactions.length
+		if (this.state.transactionListLength < totalTransactionCount) {
+			this.state.transactionListLength = this.state.transactionListLength + 10
+		} else {
+			alert('There are no more transactions.')
+		}
 	}
 
 	render() {
