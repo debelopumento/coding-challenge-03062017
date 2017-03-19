@@ -6,8 +6,10 @@ const cors = require('cors');
 
 mongoose.Promise = global.Promise;
 
-if (process.env.NODE_ENV !== 'production') {
+try {
     require('dotenv').config()
+} catch (error) {
+    console.warn('unable to load .env')
 }
 
 const {PORT, DATABASE_URL} = require('./config');
@@ -86,7 +88,6 @@ app.put('/submitTransaction', (req, res) => {
         .findByIdAndUpdate('58c86def734d1d635102a8c9', transactionHistory)
         .exec()
         .then(function() {
-          console.log(404)
           res.status(201).json({message: 'Transaction submitted!', transactionHistory})
         })
         .catch(
