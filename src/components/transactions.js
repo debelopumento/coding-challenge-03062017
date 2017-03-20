@@ -75,7 +75,7 @@ class TransactionInfo extends PureComponent {
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(()=>{this.props.load()}, 20000)
+		this.interval = setInterval(()=>{this.props.load()}, 1000)
 	}
 
 	componentWillUnmount() {
