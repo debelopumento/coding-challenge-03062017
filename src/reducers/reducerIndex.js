@@ -10,9 +10,8 @@ const TransactionHistoryReducer = (state=null, action) => {
 			return state
 			
 		}
+		default: return state
 	}
-
-	return state
 }
 
 const allReducers = combineReducers({
