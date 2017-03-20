@@ -1,4 +1,5 @@
 # Long Game Programming Challenge  [![Build Status](https://travis-ci.org/debelopumento/long-game-challenge.svg?branch=master)](https://travis-ci.org/debelopumento/long-game-challenge)
+(Continuous Integration on Travis CI was disabled after the repo was set to private)
 
 This is my solution to Long Game's Programming challenge. I built the client side with React and the server side with Node.
 
