@@ -16,7 +16,8 @@ const styles = reactCSS({
 const TransactionList = (props) => {
 	const formatDate = (time) => {
 		const date = new Date(time)
-		const formatedDate = (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear().toString().slice(0,2)
+		console.log(12, date)
+		const formatedDate = (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear().toString().slice(2,5)
 		return formatedDate
 	}
 	const formatTime = (time) => {
